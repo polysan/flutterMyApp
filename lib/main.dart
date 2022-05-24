@@ -16,7 +16,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // 画面遷移する方法①
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // 画面遷移する方法②
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/nextpage': (context) => NextPage(),
+      },
     );
   }
 }
@@ -36,11 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
@@ -55,12 +59,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child:RaisedButton (
           child: Text('次へ'),
           onPressed: (){
-            Navigator.push(
+            /*画面遷移する方法②*/
+            Navigator.pushNamed(context, '/nextpage');
+            // 画面遷移する方法①
+            /*Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => NextPage()
               ),
-            );
+            );*/
           },
         ),
      ),
