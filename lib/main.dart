@@ -17,15 +17,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // 画面遷移する方法①
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // 画面遷移する方法②
-      initialRoute: '/',
+      /*initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/nextpage': (context) => NextPage(),
-      },
+      },*/
     );
   }
 }
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
-
+String text = '最初';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,19 +56,29 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child:RaisedButton (
-          child: Text('次へ'),
-          onPressed: (){
-            /*画面遷移する方法②*/
-            Navigator.pushNamed(context, '/nextpage');
-            // 画面遷移する方法①
-            /*Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => NextPage()
-              ),
-            );*/
-          },
+        child:Column(
+          children: [
+            Text(text),
+            RaisedButton (
+              child: Text('次へ'),
+              onPressed: () async {
+                // 画面遷移する方法②
+                // Navigator.pushNamed(context, '/nextpage');
+                // 画面遷移する方法①
+                final result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NextPage('次へ渡す値')
+                  ),
+                );
+                // text = result;
+                print(result);
+                setState(() {
+                  text = result;
+                });
+              },
+            ),
+          ],
         ),
      ),
      floatingActionButton: FloatingActionButton(
