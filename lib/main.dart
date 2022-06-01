@@ -57,7 +57,17 @@ String text = '最初';
       ),
       body: Center(
         child:Column(
+          // 上下中央寄せ
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // フォルダから画像を表示
+            Image.asset('images/crown.jpg'),
+            // web上から画像を貼り付け①
+            // const Image(
+            //   image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+            // ),
+            // web上から画像を貼り付け②
+            // Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
             Text(text),
             RaisedButton (
               child: Text('次へ'),
@@ -73,6 +83,7 @@ String text = '最初';
                 );
                 // text = result;
                 print(result);
+                // setStateをつけないと値が反映されない
                 setState(() {
                   text = result;
                 });
