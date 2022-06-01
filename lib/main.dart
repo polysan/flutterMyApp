@@ -60,6 +60,12 @@ String text = '最初';
           // 上下中央寄せ
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // アイコン表示
+            const Icon(
+                Icons.access_alarm_outlined,
+                color: Colors.redAccent,
+                size:150
+            ),
             // フォルダから画像を表示
             Image.asset('images/crown.jpg'),
             // web上から画像を貼り付け①
