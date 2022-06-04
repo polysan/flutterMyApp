@@ -76,7 +76,7 @@ String text = '最初';
             // Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
             Text(text),
             RaisedButton (
-              child: Text('次へ'),
+              child: const Text('次へ'),
               onPressed: () async {
                 // 画面遷移する方法②
                 // Navigator.pushNamed(context, '/nextpage');
