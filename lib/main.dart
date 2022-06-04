@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-
   final String title;
 
   @override
@@ -48,7 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
     //   _counter++;
     // });
   }
-String text = '最初';
+
+  String text = '最初';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,16 +57,13 @@ String text = '最初';
         title: Text(widget.title),
       ),
       body: Center(
-        child:Column(
+        child: Column(
           // 上下中央寄せ
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // アイコン表示
-            const Icon(
-                Icons.access_alarm_outlined,
-                color: Colors.redAccent,
-                size:150
-            ),
+            const Icon(Icons.access_alarm_outlined,
+                color: Colors.redAccent, size: 150),
             // フォルダから画像を表示
             Image.asset('images/crown.jpg'),
             // web上から画像を貼り付け①
@@ -75,7 +73,7 @@ String text = '最初';
             // web上から画像を貼り付け②
             // Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
             Text(text),
-            RaisedButton (
+            RaisedButton(
               child: const Text('次へ'),
               onPressed: () async {
                 // 画面遷移する方法②
@@ -83,9 +81,7 @@ String text = '最初';
                 // 画面遷移する方法①
                 final result = await Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => NextPage('次へ渡す値')
-                  ),
+                  MaterialPageRoute(builder: (context) => NextPage('次へ渡す値')),
                 );
                 // text = result;
                 print(result);
@@ -97,12 +93,11 @@ String text = '最初';
             ),
           ],
         ),
-     ),
-     floatingActionButton: FloatingActionButton(
-      onPressed: _incrementCounter,
-      tooltip: 'Increment',
-      child: const Icon(Icons.add)
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: const Icon(Icons.add)),
     );
   }
 }
