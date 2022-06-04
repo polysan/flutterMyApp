@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wolf/third_page.dart';
 
 class NextPage extends StatelessWidget {
   // NextPageを作るときにnameを入れるようにする
   NextPage(this.name);
   final String name;
+  var text;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,11 +59,29 @@ class NextPage extends StatelessWidget {
                 )
             ),
             Center(
-              child:RaisedButton (
-                child: const Text('戻る'),
-                onPressed: (){
-                  Navigator.pop(context,'戻す値aaaaaa');
-                },
+              child:Column(
+                children: [
+                  RaisedButton (
+                    child: const Text('戻る'),
+                    onPressed: (){
+                      Navigator.pop(context,'戻す値aaaaaa');
+                    },
+                  ),
+                  RaisedButton (
+                    child: const Text('次へ'),
+                    onPressed: () async {
+                      final result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => thirdPage('次へ渡す値')
+                        ),
+                      );
+                      // text = result;
+                      print(result);
+                        text = result;
+                    },
+                  ),
+                ],
               ),
             ),
           ],
