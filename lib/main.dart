@@ -42,17 +42,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    // setState(() {
-    //   _counter++;
-    // });
-  }
+  bool turnOfCircle = true;
 
   String text = '最初';
 
   @override
+  // build；UIを表示
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.circle),
+                    turnOfCircle ? Icon(FontAwesomeIcons.circle) : Icon(Icons.clear),
                     Text('の番です'),
                   ],
                 ),
@@ -107,16 +102,25 @@ class _MyHomePageState extends State<MyHomePage> {
       for(int i = 0; i < 3; i++) {
         _rowChildren.add(
             Expanded(
-                child: AspectRatio(
-                    aspectRatio: 1.0,
-                    child: i == 2
-                        ? Container()
-                        :Row(
-                      children: [
-                        Expanded(child: Container()),
-                        VerticalDivider(width: 0.0,color: Colors.black),
-                      ],
-                    )
+                // InkWell：クリックできないUIをクリックできるようにする
+                child: InkWell(
+                  onTap: (){
+                    turnOfCircle = !turnOfCircle;
+                    setState(() {
+                    });
+                  },
+                  // AspectRatio：正方形にしている
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: i == 2
+                          ? Container()
+                          :Row(
+                        children: [
+                          Expanded(child: Container()),
+                          VerticalDivider(width: 0.0,color: Colors.black),
+                        ],
+                      )
+                  ),
                 )
             )
         );
@@ -130,8 +134,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-//todo ターンの表示とクリアボタンの作成
-//todo マス目をタップ可能にし、タップ時にターン切り替え
 //todo マス目タップでマルバツを表示
 //todo ゲームの勝敗のパターンを書き出す
 //todo ゲームの勝敗を判定可能に
