@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row (
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(FontAwesomeIcons.circle, color: Colors.green, size: 30),
@@ -64,48 +64,136 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Center(
-        child: Column(
-          // 上下中央寄せ
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // アイコン表示
-            const Icon(Icons.access_alarm_outlined,
-                color: Colors.redAccent, size: 150),
-            // フォルダから画像を表示
-            Image.asset('images/crown.jpg'),
-            // web上から画像を貼り付け①
-            // const Image(
-            //   image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-            // ),
-            // web上から画像を貼り付け②
-            // Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-            Text(text),
-            RaisedButton(
-              child: const Text('次へ'),
-              onPressed: () async {
-                // 画面遷移する方法②
-                // Navigator.pushNamed(context, '/nextpage');
-                // 画面遷移する方法①
-                final result = await Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NextPage('次へ渡す値')),
-                );
-                // text = result;
-                print(result);
-                // setStateをつけないと値が反映されない
-                setState(() {
-                  text = result;
-                });
-              },
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                            ),
+                          ),
+                          VerticalDivider(
+                            width: 0.0,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ))),
+
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                            ),
+                          ),
+                          VerticalDivider(
+                            width: 0.0,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ))),
+
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Container(
+                      ))),
+            ],
+          ),
+          Divider(height: 0.0, color: Colors.black,),
+          Row(
+            children: [
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                            ),
+                          ),
+                          VerticalDivider(
+                            width: 0.0,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ))),
+
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                            ),
+                          ),
+                          VerticalDivider(
+                            width: 0.0,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ))),
+
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Container(
+                      ))),
+            ],
+          ),
+          Divider(height: 0.0, color: Colors.black,),
+          Row(
+            children: [
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                            ),
+                          ),
+                          VerticalDivider(
+                            width: 0.0,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ))),
+
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                            ),
+                          ),
+                          VerticalDivider(
+                            width: 0.0,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ))),
+
+              Expanded(
+                  child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Container(
+                      ))),
+            ],
+          ),
+          Divider(height: 0.0, color: Colors.black,),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add)),
     );
   }
 }
