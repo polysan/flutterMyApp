@@ -64,142 +64,46 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                            ),
-                          ),
-                          VerticalDivider(
-                            width: 0.0,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ))),
-
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                            ),
-                          ),
-                          VerticalDivider(
-                            width: 0.0,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ))),
-
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Container(
-                      ))),
-            ],
-          ),
-          Divider(height: 0.0, color: Colors.black,),
-          Row(
-            children: [
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                            ),
-                          ),
-                          VerticalDivider(
-                            width: 0.0,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ))),
-
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                            ),
-                          ),
-                          VerticalDivider(
-                            width: 0.0,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ))),
-
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Container(
-                      ))),
-            ],
-          ),
-          Divider(height: 0.0, color: Colors.black,),
-          Row(
-            children: [
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                            ),
-                          ),
-                          VerticalDivider(
-                            width: 0.0,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ))),
-
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                            ),
-                          ),
-                          VerticalDivider(
-                            width: 0.0,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ))),
-
-              Expanded(
-                  child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: Container(
-                      ))),
-            ],
-          ),
-          Divider(height: 0.0, color: Colors.black,),
-        ],
-      ),
+      body: buildField(),
     );
+  }
+
+  Column buildField() {
+    // 変数名の先頭にアンダースコア_をつけることでprivate変数として扱うことができる
+    /// 縦の3列を作成するリスト
+    List<Widget>_columnChildren = [];
+    /// 横の３列を作成するリスト
+    List<Widget>_rowChildren = [];
+
+    // 縦の３列を作成するループ
+    for (int h = 0; h < 3; h++) {
+      // 横の３列を作成するループ
+      for(int i = 0; i < 3; i++) {
+        _rowChildren.add(
+            Expanded(
+                child: AspectRatio(
+                    aspectRatio: 1.0,
+                    child: i == 2
+                        ? Container()
+                        :Row(
+                      children: [
+                        Expanded(child: Container()),
+                        VerticalDivider(width: 0.0,color: Colors.black),
+                      ],
+                    )
+                )
+            )
+        );
+      }
+      _columnChildren.add(Row(children: _rowChildren,));
+      _columnChildren.add(Divider(height: 0.0, color: Colors.black,));
+      _rowChildren = [];
+
+    }
+    return Column(children: _columnChildren,);
   }
 }
 
-//todo アプリのタイトルを変更
-//todo フィールドのUIを作成
 //todo フィールドのUI作成をメソッドを用いて簡潔に
 //todo ターンの表示とクリアボタンの作成
 //todo マス目をタップ可能にし、タップ時にターン切り替え
