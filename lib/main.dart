@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wolf/next_page.dart';
@@ -64,14 +65,39 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: buildField(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(FontAwesomeIcons.circle),
+                    Text('の番です'),
+                  ],
+                ),
+                OutlineButton(
+                    borderSide: BorderSide(),
+                    child: Text('クリア'),
+                    onPressed: (){
+
+                  }
+                )
+              ],
+            ),
+          ),
+          buildField(),
+        ],
+      ),
     );
   }
 
   Column buildField() {
     // 変数名の先頭にアンダースコア_をつけることでprivate変数として扱うことができる
     /// 縦の3列を作成するリスト
-    List<Widget>_columnChildren = [];
+    List<Widget>_columnChildren = [Divider(height: 0.0, color: Colors.black)];
     /// 横の３列を作成するリスト
     List<Widget>_rowChildren = [];
 
@@ -104,7 +130,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-//todo フィールドのUI作成をメソッドを用いて簡潔に
 //todo ターンの表示とクリアボタンの作成
 //todo マス目をタップ可能にし、タップ時にターン切り替え
 //todo マス目タップでマルバツを表示
