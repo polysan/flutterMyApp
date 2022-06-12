@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wolf/model.dart';
 import 'package:wolf/next_page.dart';
 
 void main() {
@@ -43,7 +44,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool turnOfCircle = true;
-
+  // filled：要素を埋めるメソッド
+  List<PieceStatus> statusList = List.filled(9, PieceStatus.none);
   String text = '最初';
 
   @override
@@ -89,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+///  関数
   Column buildField() {
     // 変数名の先頭にアンダースコア_をつけることでprivate変数として扱うことができる
     /// 縦の3列を作成するリスト
@@ -100,30 +103,34 @@ class _MyHomePageState extends State<MyHomePage> {
     for (int h = 0; h < 3; h++) {
       // 横の３列を作成するループ
       for(int i = 0; i < 3; i++) {
+       int _index = h * 3 + i;
         _rowChildren.add(
             Expanded(
                 // InkWell：クリックできないUIをクリックできるようにする
                 child: InkWell(
                   onTap: (){
-                    turnOfCircle = !turnOfCircle;
-                    setState(() {
-                    });
+                    if(statusList[_index] == PieceStatus.none) {
+                      statusList[_index] = turnOfCircle ? PieceStatus.circle : PieceStatus.cross;
+                      turnOfCircle = !turnOfCircle;
+                      setState(() {
+                      });
+                    }
                   },
                   // AspectRatio：正方形にしている
                   child: AspectRatio(
                       aspectRatio: 1.0,
-                      child: i == 2
-                          ? Container()
-                          :Row(
+                      child:Row(
                         children: [
-                          Expanded(child: Container()),
-                          VerticalDivider(width: 0.0,color: Colors.black),
+                          Expanded(
+                              child: buildContainer(statusList[_index])
+                  ),
+                    (i == 2) ? Container() : VerticalDivider(width: 0.0,color: Colors.black),
                         ],
                       )
-                  ),
+                      ),
+                  )
                 )
-            )
-        );
+            );
       }
       _columnChildren.add(Row(children: _rowChildren,));
       _columnChildren.add(Divider(height: 0.0, color: Colors.black,));
@@ -131,6 +138,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
     }
     return Column(children: _columnChildren,);
+  }
+
+  Container buildContainer(PieceStatus pieceStatus){
+    switch(pieceStatus){
+      case PieceStatus.none:
+        return Container();
+      case PieceStatus.circle:
+        return Container(
+          child: Icon(FontAwesomeIcons.circle, size:60, color: Colors.blue,),
+        );
+      case PieceStatus.cross:
+        return Container(
+          child: Icon(Icons.clear, size: 60, color: Colors.red),
+        );
+        default:return Container();
+    }
   }
 }
 
