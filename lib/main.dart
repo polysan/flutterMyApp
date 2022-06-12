@@ -43,10 +43,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String text = '最初';
+
   bool turnOfCircle = true;
   // filled：要素を埋めるメソッド
   List<PieceStatus> statusList = List.filled(9, PieceStatus.none);
-  String text = '最初';
+  GameStatus gameStatus = GameStatus.play;
+
+  final List<List<int>> settlementListHorizontal = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+  ];
+
+  final List<List<int>> settlementListVertical = [
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+  ];
+
+  final List<List<int>> settlementListDiagonal = [
+    [0,4,8],
+    [2,4,6],
+  ];
+
+
 
   @override
   // build；UIを表示
@@ -157,7 +178,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-//todo マス目タップでマルバツを表示
 //todo ゲームの勝敗のパターンを書き出す
 //todo ゲームの勝敗を判定可能に
 //todo リセットボタンタップでリスタート可能に
