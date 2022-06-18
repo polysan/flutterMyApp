@@ -90,12 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    turnOfCircle ? Icon(FontAwesomeIcons.circle) : Icon(Icons.clear),
-                    Text('の番です'),
-                  ],
-                ),
+                buildText(),
                 OutlineButton(
                     borderSide: BorderSide(),
                     child: Text('クリア'),
@@ -110,6 +105,29 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  Widget buildText() {
+    switch(gameStatus){
+      case GameStatus.play:
+        return Row(
+          children: [
+            turnOfCircle ? Icon(FontAwesomeIcons.circle) : Icon(Icons.clear),
+            Text('の番です'),
+          ],
+        );
+      case GameStatus.draw:
+        return Text('引き分けです');
+      case GameStatus.settlement:
+      return Row(
+        children: [
+          !turnOfCircle ? Icon(FontAwesomeIcons.circle) : Icon(Icons.clear),
+          Text('の勝ちです'),
+        ],
+      );
+      default:
+      return Container();
+    }
   }
 
 ///  関数
@@ -129,14 +147,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
                 // InkWell：クリックできないUIをクリックできるようにする
                 child: InkWell(
-                  onTap: (){
+                  onTap: gameStatus == GameStatus.play ? (){
                     if(statusList[_index] == PieceStatus.none) {
                       statusList[_index] = turnOfCircle ? PieceStatus.circle : PieceStatus.cross;
                       turnOfCircle = !turnOfCircle;
-                      setState(() {
-                      });
+                      confirmResult();
                     }
-                  },
+                    setState(() {});
+                  } : null,
                   // AspectRatio：正方形にしている
                   child: AspectRatio(
                       aspectRatio: 1.0,
@@ -176,9 +194,38 @@ class _MyHomePageState extends State<MyHomePage> {
         default:return Container();
     }
   }
+  void confirmResult () {
+    if(!statusList.contains(PieceStatus.none)){
+      gameStatus = GameStatus.draw;
+    }
+    // 行における勝敗パターン
+    for(int i = 0; i < settlementListHorizontal.length; i++) {
+      if(statusList[settlementListHorizontal[i][0]] == statusList[settlementListHorizontal[i][1]]
+        && statusList[settlementListHorizontal[i][1]] == statusList[settlementListHorizontal[i][2]]
+        && statusList[settlementListHorizontal[i][0]] != PieceStatus.none
+      ){
+        gameStatus = GameStatus.settlement;
+      }
+      // 列における勝敗パターン
+    }for(int i = 0; i < settlementListVertical.length; i++) {
+      if(statusList[settlementListVertical[i][0]] == statusList[settlementListVertical[i][1]]
+        && statusList[settlementListVertical[i][1]] == statusList[settlementListVertical[i][2]]
+        && statusList[settlementListVertical[i][0]] != PieceStatus.none
+      ){
+        gameStatus = GameStatus.settlement;
+      }
+      // 斜めにおける勝敗パターン
+    }for(int i = 0; i < settlementListDiagonal.length; i++) {
+      if(statusList[settlementListDiagonal[i][0]] == statusList[settlementListDiagonal[i][1]]
+        && statusList[settlementListDiagonal[i][1]] == statusList[settlementListDiagonal[i][2]]
+        && statusList[settlementListDiagonal[i][0]] != PieceStatus.none
+      ){
+        gameStatus = GameStatus.settlement;
+      }
+    }
+  }
 }
 
-//todo ゲームの勝敗のパターンを書き出す
-//todo ゲームの勝敗を判定可能に
+
 //todo リセットボタンタップでリスタート可能に
 //todo 勝敗をわかりやすく表示
